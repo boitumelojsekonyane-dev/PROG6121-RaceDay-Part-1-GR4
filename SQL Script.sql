@@ -160,3 +160,15 @@ VALUES
     ('Run', 'Road running event'),
     ('Walk', 'Road walking event'),
     ('Cycle', 'Road cycling event');
+
+    INSERT INTO Admins
+    (FirstName, Surname, Email, PhoneNumber)
+VALUES
+    ('Thabo', 'Mokoena', 'thabo.mokoena@raceday.co.za', '0712345678'),
+    ('Rayno', 'Alberts', 'rayno.alberts@raceday.co.za', '0685247889'),
+    ('Trudy', 'Van Der Merwe', 'TrudyVDM@raceday.co.za', '0651239874'),
+    ('Naledi', 'Molefe', 'naledi.molefe@raceday.co.za', '0723456789'),
+    ('Kabelo', 'Dlamini', 'kabelo.dlamini@raceday.co.za', '0734567890'),
+    ('Lerato', 'Nkosi', 'lerato.nkosi@raceday.co.za', '0745678901'),
+    ('Mpho', 'Mahlangu', 'mpho.mahlangu@raceday.co.za', '0756789012'),
+    ('Jacobie', 'Jansen', 'jac.jansen35@raceday.co.za', '0748523699');

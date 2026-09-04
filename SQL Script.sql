@@ -57,3 +57,17 @@ CREATE TABLE Events (
         FOREIGN KEY (EventTypeID)
         REFERENCES EventTypes(EventTypeID)
 );
+
+CREATE TABLE EventCategories (
+    EventCategoryID INT IDENTITY(1,1) PRIMARY KEY,
+    EventID INT NOT NULL,
+    CategoryName VARCHAR(100) NOT NULL,
+    Description VARCHAR(200) NULL,
+    MinAge INT NULL,
+    MaxAge INT NULL,
+    DistanceKm DECIMAL(6,2) NULL,
+
+    CONSTRAINT FK_EventCategories_Events
+        FOREIGN KEY (EventID)
+        REFERENCES Events(EventID)
+);

@@ -125,3 +125,23 @@ CREATE TABLE Weather (
         FOREIGN KEY (EventID)
         REFERENCES Events(EventID)
 );
+
+CREATE TABLE Results (
+    ResultID INT IDENTITY(1,1) PRIMARY KEY,
+    EnrolmentID INT NOT NULL,
+    PositionCategory INT NULL,
+    OverallPosition INT NULL,
+    PaceMinKm DECIMAL(6,2) NULL,
+    StartTime TIME NULL,
+    FinishTime TIME NOT NULL,
+    CapturedByAdminID INT NOT NULL,
+    CapturedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+
+    CONSTRAINT FK_Results_Enrolments
+        FOREIGN KEY (EnrolmentID)
+        REFERENCES Enrolments(EnrolmentID),
+
+    CONSTRAINT FK_Results_Admins
+        FOREIGN KEY (CapturedByAdminID)
+        REFERENCES Admins(AdminID)
+);

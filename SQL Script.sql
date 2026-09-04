@@ -293,3 +293,16 @@ VALUES
     (3, '2026-11-22', '06:00:00', 16.50, 25,
      'RaceDay Weather Service',
      'Mild morning with a moderate coastal breeze.');
+
+        INSERT INTO Results
+    (EnrolmentID, PositionCategory, OverallPosition,
+     PaceMinKm, StartTime, FinishTime, CapturedByAdminID)
+VALUES
+    (2, 2, 2, 5.10, '07:00:00', '08:47:00', 1),
+    (3, 1, 1, 4.95, '07:00:00', '08:44:00', 1),
+    (4, 1, 1, 7.20, '08:00:00', '09:12:00', 2),
+    (5, 2, 2, 7.50, '08:00:00', '09:15:00', 2),
+    (6, 2, 2, 4.85, '06:30:00', '09:53:00', 3),
+    (7, 1, 1, 4.60, '06:30:00', '09:44:00', 3),
+    (8, 3, 3, 5.35, '07:00:00', '08:52:00', 1),
+    (9, 3, 4, 5.55, '07:00:00', '08:55:00', 1);

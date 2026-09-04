@@ -71,3 +71,23 @@ CREATE TABLE EventCategories (
         FOREIGN KEY (EventID)
         REFERENCES Events(EventID)
 );
+
+CREATE TABLE Enrolments (
+    EnrolmentID INT IDENTITY(1,1) PRIMARY KEY,
+    ParticipantID INT NOT NULL,
+    EventCategoryID INT NOT NULL,
+    EnrolmentDate DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    EventStatus VARCHAR(30) NOT NULL DEFAULT 'Registered',
+    PaymentStatus VARCHAR(30) NOT NULL DEFAULT 'Pending',
+    AmountPaid DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    PaymentReference VARCHAR(100) NULL,
+    ConfirmationCode VARCHAR(50) NOT NULL UNIQUE,
+
+    CONSTRAINT FK_Enrolments_Participants
+        FOREIGN KEY (ParticipantID)
+        REFERENCES Participants(ParticipantID),
+
+    CONSTRAINT FK_Enrolments_EventCategories
+        FOREIGN KEY (EventCategoryID)
+        REFERENCES EventCategories(EventCategoryID)
+);

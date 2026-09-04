@@ -91,3 +91,21 @@ CREATE TABLE Enrolments (
         FOREIGN KEY (EventCategoryID)
         REFERENCES EventCategories(EventCategoryID)
 );
+
+CREATE TABLE Routes (
+    RouteID INT IDENTITY(1,1) PRIMARY KEY,
+    EventID INT NOT NULL,
+    AdminID INT NOT NULL,
+    RouteName VARCHAR(100) NOT NULL,
+    Description VARCHAR(500) NULL,
+    RouteStartKm DECIMAL(6,2) NOT NULL,
+    RouteFinishKm DECIMAL(6,2) NOT NULL,
+
+    CONSTRAINT FK_Routes_Events
+        FOREIGN KEY (EventID)
+        REFERENCES Events(EventID),
+
+    CONSTRAINT FK_Routes_Admins
+        FOREIGN KEY (AdminID)
+        REFERENCES Admins(AdminID)
+);

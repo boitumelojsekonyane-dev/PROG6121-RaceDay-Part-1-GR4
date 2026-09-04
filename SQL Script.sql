@@ -233,3 +233,18 @@ VALUES
      'Road cycling event for recreational and competitive cyclists.',
      '2026-11-22', '06:30:00', 'Cape Town', 42.00,
      '2026-08-20', '2026-11-15', 350.00, 'Upcoming');
+
+      INSERT INTO EventCategories
+    (EventID, CategoryName, Description, MinAge, MaxAge, DistanceKm)
+VALUES
+    (1, '21KM Open', 'Open 21 kilometre race', 18, 60, 21.10),
+    (1, '21KM Women', 'Women''s 21 kilometre race', 18, 60, 21.10),
+    (1, '21KM Men', 'Men''s 21 kilometre race', 18, 60, 21.10),
+
+    (2, '10KM Open', 'Open 10 kilometre charity walk', 18, 70, 10.00),
+    (2, '10KM Women', 'Women''s 10 kilometre charity walk', 18, 70, 10.00),
+    (2, '10KM Men', 'Men''s 10 kilometre charity walk', 18, 70, 10.00),
+
+    (3, '42KM Open', 'Open 42 kilometre cycle challenge', 18, 60, 42.00),
+    (3, '42KM Women', 'Women''s 42 kilometre cycle challenge', 18, 60, 42.00),
+    (3, '42KM Men', 'Men''s 42 kilometre cycle challenge', 18, 60, 42.00);

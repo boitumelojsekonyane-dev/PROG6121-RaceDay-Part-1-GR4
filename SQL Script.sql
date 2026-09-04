@@ -213,3 +213,23 @@ VALUES
     ('Andile', 'Dube', 'andile.dube@example.com', 'andile.dube',
      '0826547123', 'Nokuthula Dube - 0898905663', '1990-03-29',
      '9003295123094', NULL, 'Male', 'Gauteng');
+
+       INSERT INTO Events
+    (AdminID, EventTypeID, Title, Description, EventDate,
+     StartTime, Location, DistanceKm, RegistrationOpens,
+     RegistrationCloses, EntryFee, StatusOfEvent)
+VALUES
+    (1, 1, 'Johannesburg City Run',
+     'Annual road running event through Johannesburg.',
+     '2026-10-18', '07:00:00', 'Johannesburg', 21.10,
+     '2026-08-01', '2026-10-10', 250.00, 'Upcoming'),
+
+    (2, 2, 'Pretoria Charity Walk',
+     'Community walking event supporting local charities.',
+     '2026-11-07', '08:00:00', 'Pretoria', 10.00,
+     '2026-08-15', '2026-10-31', 100.00, 'Upcoming'),
+
+    (3, 3, 'Cape Town Cycle Challenge',
+     'Road cycling event for recreational and competitive cyclists.',
+     '2026-11-22', '06:30:00', 'Cape Town', 42.00,
+     '2026-08-20', '2026-11-15', 350.00, 'Upcoming');

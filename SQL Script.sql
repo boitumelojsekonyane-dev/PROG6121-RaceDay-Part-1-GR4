@@ -153,3 +153,10 @@ SELECT * FROM Events;
 SELECT * FROM Enrolments;
 
 SELECT * FROM Results;
+
+INSERT INTO EventTypes
+    (TypeName, Description)
+VALUES
+    ('Run', 'Road running event'),
+    ('Walk', 'Road walking event'),
+    ('Cycle', 'Road cycling event');

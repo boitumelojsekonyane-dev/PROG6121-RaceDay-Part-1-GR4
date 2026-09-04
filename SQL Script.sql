@@ -277,3 +277,19 @@ VALUES
     (3, 3, 'Cape Town 42KM Route',
      'Road route for the Cape Town Cycle Challenge.',
      0.00, 42.00);
+
+       INSERT INTO Weather
+    (EventID, ForecastDate, ForecastTime, TemperatureC,
+     RainProbability, Source, Notes)
+VALUES
+    (1, '2026-10-18', '06:30:00', 18.50, 20,
+     'RaceDay Weather Service',
+     'Cool morning with low chance of rain.'),
+
+    (2, '2026-11-07', '07:30:00', 17.00, 15,
+     'RaceDay Weather Service',
+     'Clear morning expected.'),
+
+    (3, '2026-11-22', '06:00:00', 16.50, 25,
+     'RaceDay Weather Service',
+     'Mild morning with a moderate coastal breeze.');

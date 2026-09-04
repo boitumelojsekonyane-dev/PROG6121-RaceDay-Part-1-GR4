@@ -1,1 +1,9 @@
 CREATE DATABASE RaceDayActivitiesDB;
+
+CREATE TABLE Admins (
+    AdminID INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    Surname VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL UNIQUE,
+    PhoneNumber VARCHAR(20) NOT NULL
+);

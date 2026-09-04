@@ -109,3 +109,19 @@ CREATE TABLE Routes (
         FOREIGN KEY (AdminID)
         REFERENCES Admins(AdminID)
 );
+
+CREATE TABLE Weather (
+    WeatherID INT IDENTITY(1,1) PRIMARY KEY,
+    EventID INT NOT NULL,
+    ForecastDate DATE NOT NULL,
+    ForecastTime TIME NOT NULL,
+    TemperatureC DECIMAL(5,2) NOT NULL,
+    RainProbability INT NOT NULL,
+    Source VARCHAR(150) NOT NULL,
+    Notes VARCHAR(500) NULL,
+    CapturedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+
+    CONSTRAINT FK_Weather_Events
+        FOREIGN KEY (EventID)
+        REFERENCES Events(EventID)
+);

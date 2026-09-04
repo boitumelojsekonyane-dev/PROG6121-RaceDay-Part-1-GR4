@@ -145,3 +145,11 @@ CREATE TABLE Results (
         FOREIGN KEY (CapturedByAdminID)
         REFERENCES Admins(AdminID)
 );
+
+SELECT * FROM Participants;
+
+SELECT * FROM Events;
+
+SELECT * FROM Enrolments;
+
+SELECT * FROM Results;

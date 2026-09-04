@@ -26,3 +26,10 @@ CREATE TABLE Participants (
     CONSTRAINT CK_Participants_Identification
     CHECK (IdentityNumber IS NOT NULL OR PassportNumber IS NOT NULL)
 );
+
+CREATE TABLE EventTypes (
+    EventTypeID INT IDENTITY(1,1) PRIMARY KEY,
+    TypeName VARCHAR(50) NOT NULL UNIQUE,
+    Description VARCHAR(150) NULL,
+    IsActive BIT NOT NULL DEFAULT 1
+);

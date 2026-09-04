@@ -248,3 +248,16 @@ VALUES
     (3, '42KM Open', 'Open 42 kilometre cycle challenge', 18, 60, 42.00),
     (3, '42KM Women', 'Women''s 42 kilometre cycle challenge', 18, 60, 42.00),
     (3, '42KM Men', 'Men''s 42 kilometre cycle challenge', 18, 60, 42.00);
+
+     INSERT INTO Enrolments
+    (ParticipantID, EventCategoryID, EventStatus,
+     PaymentStatus, AmountPaid, PaymentReference, ConfirmationCode)
+VALUES
+    (3, 2, 'Registered', 'Paid', 250.00, 'PAY10001', 'RD10001'),
+    (4, 2, 'Registered', 'Paid', 250.00, 'PAY10002', 'RD10002'),
+    (5, 4, 'Registered', 'Paid', 100.00, 'PAY10003', 'RD10003'),
+    (6, 5, 'Registered', 'Pending', 0.00, NULL, 'RD10004'),
+    (7, 8, 'Registered', 'Paid', 350.00, 'PAY10005', 'RD10005'),
+    (8, 9, 'Registered', 'Paid', 350.00, 'PAY10006', 'RD10006'),
+    (9, 1, 'Registered', 'Paid', 250.00, 'PAY10007', 'RD10007'),
+    (10, 3, 'Registered', 'Paid', 250.00, 'PAY10008', 'RD10008');

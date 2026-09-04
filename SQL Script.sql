@@ -172,3 +172,44 @@ VALUES
     ('Lerato', 'Nkosi', 'lerato.nkosi@raceday.co.za', '0745678901'),
     ('Mpho', 'Mahlangu', 'mpho.mahlangu@raceday.co.za', '0756789012'),
     ('Jacobie', 'Jansen', 'jac.jansen35@raceday.co.za', '0748523699');
+
+    INSERT INTO Participants
+    (FirstName, Surname, Email, UserName, PhoneNumber,
+     EmergencyContact, DateOfBirth, IdentityNumber, PassportNumber,
+     Gender, Province)
+VALUES
+    ('Sipho', 'Ndlovu', 'sipho.ndlovu@Yahoo.com', 'sipho.ndlovu',
+     '0819874563', 'Ayanda Ndlovu - 0821453695', '1998-05-14',
+     '9805145123087', NULL, 'Male', 'Gauteng'),
+
+    ('Anele', 'Mthembu', 'anele.mthembu@gmail.com', 'anele.mthembu',
+     '0835289654', 'Lindiwe Mthembu - 0832123658', '2001-08-21',
+     '0108215123088', NULL, 'Female', 'KwaZulu-Natal'),
+
+    ('Tshepo', 'Molefe', 'tshepo.molefe@myunisa.edu.za', 'tshepo.molefe',
+     '0837896354', 'Neo Molefe - 0843735896', '1995-02-10',
+     '9502105123089', NULL, 'Male', 'Free State'),
+
+    ('Palesa', 'Mokoena', 'palesa.mokoena@fitworld.co.za', 'palesa.mokoena',
+     '0864785112', 'Karabo Mokoena - 0854115999', '1999-11-03',
+     '9911035123090', NULL, 'Female', 'Gauteng'),
+
+    ('Bongani', 'Zulu', 'bongani.zulu@Yahoo.com', 'bongani.zulu',
+     '0856942314', 'Sibusiso Zulu - 0745823366', '1992-06-17',
+     '9206175123091', NULL, 'Male', 'KwaZulu-Natal'),
+
+    ('Jenny', 'Wilders', 'jenwilders@gmail.com', 'fitjen',
+     '0851236699', 'August Wilders - 0748523366', '1987-05-14',
+     '8714050683086', NULL, 'Female', 'Western Cape'),
+
+    ('Karabo', 'Mahlangu', 'karabo.mahlangu@Yahoo.com', 'karabo.mahlangu',
+     '0864789663', 'Refilwe Mahlangu - 0876225912', '2003-01-25',
+     '0301255123092', NULL, 'Female', 'Mpumalanga'),
+
+    ('Lerato', 'Seboko', 'lerato.seboko@gmail.com', 'lerato.seboko',
+     '0878147553', 'Mpho Seboko - 0886982134', '1997-09-12',
+     '9709125123093', NULL, 'Female', 'North West'),
+
+    ('Andile', 'Dube', 'andile.dube@example.com', 'andile.dube',
+     '0826547123', 'Nokuthula Dube - 0898905663', '1990-03-29',
+     '9003295123094', NULL, 'Male', 'Gauteng');

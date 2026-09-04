@@ -261,3 +261,19 @@ VALUES
     (8, 9, 'Registered', 'Paid', 350.00, 'PAY10006', 'RD10006'),
     (9, 1, 'Registered', 'Paid', 250.00, 'PAY10007', 'RD10007'),
     (10, 3, 'Registered', 'Paid', 250.00, 'PAY10008', 'RD10008');
+
+       INSERT INTO Routes
+    (EventID, AdminID, RouteName, Description,
+     RouteStartKm, RouteFinishKm)
+VALUES
+    (1, 1, 'Johannesburg 21KM Route',
+     'Road route for the Johannesburg City Run.',
+     0.00, 21.10),
+
+    (2, 2, 'Pretoria 10KM Route',
+     'Road route for the Pretoria Charity Walk.',
+     0.00, 10.00),
+
+    (3, 3, 'Cape Town 42KM Route',
+     'Road route for the Cape Town Cycle Challenge.',
+     0.00, 42.00);

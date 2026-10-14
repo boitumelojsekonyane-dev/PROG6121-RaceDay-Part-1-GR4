@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\boitu\\Source\\Repos\\RaceDay.API\\RaceDay.API\\RaceDay.API.csproj": {}
+    "C:\\Users\\boitu\\OneDrive\\Documents\\GitHub\\PROG6121-RaceDay-Part-1-GR4\\Part 2 RESTful API\\RaceDay.API\\RaceDay.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\boitu\\Source\\Repos\\RaceDay.API\\RaceDay.API\\RaceDay.API.csproj": {
+    "C:\\Users\\boitu\\OneDrive\\Documents\\GitHub\\PROG6121-RaceDay-Part-1-GR4\\Part 2 RESTful API\\RaceDay.API\\RaceDay.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\boitu\\Source\\Repos\\RaceDay.API\\RaceDay.API\\RaceDay.API.csproj",
+        "projectUniqueName": "C:\\Users\\boitu\\OneDrive\\Documents\\GitHub\\PROG6121-RaceDay-Part-1-GR4\\Part 2 RESTful API\\RaceDay.API\\RaceDay.API.csproj",
         "projectName": "RaceDay.API",
-        "projectPath": "C:\\Users\\boitu\\Source\\Repos\\RaceDay.API\\RaceDay.API\\RaceDay.API.csproj",
+        "projectPath": "C:\\Users\\boitu\\OneDrive\\Documents\\GitHub\\PROG6121-RaceDay-Part-1-GR4\\Part 2 RESTful API\\RaceDay.API\\RaceDay.API.csproj",
         "packagesPath": "C:\\Users\\boitu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\boitu\\Source\\Repos\\RaceDay.API\\RaceDay.API\\obj\\",
+        "outputPath": "C:\\Users\\boitu\\OneDrive\\Documents\\GitHub\\PROG6121-RaceDay-Part-1-GR4\\Part 2 RESTful API\\RaceDay.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.400"
+        "SdkAnalysisLevel": "11.0.100"
       },
       "frameworks": {
         "net10.0": {
@@ -92,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100-rc.2.26504.105/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

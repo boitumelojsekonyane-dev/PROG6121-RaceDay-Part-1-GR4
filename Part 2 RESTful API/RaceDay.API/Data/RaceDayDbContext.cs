@@ -10,6 +10,14 @@ namespace RaceDay.API.Data
         {
         }
 
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Admin> Admins { get; set; } = null!;
+
+        public DbSet<Participant> Participants { get; set; } = null!;
+
+        public DbSet<EventType> EventTypes { get; set; } = null!;
+
+        public DbSet<Event> Events { get; set; } = null!;
+
+        public DbSet<EventCategory> EventCategories { get; set; } = null!;
     }
 }

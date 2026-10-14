@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using RaceDay.API.Models;
 namespace RaceDay.API.Data
 {
     public class RaceDayDbContext : DbContext
@@ -9,5 +9,7 @@ namespace RaceDay.API.Data
             : base(options)
         {
         }
+
+        public DbSet<Admin> Admins { get; set; }
     }
 }

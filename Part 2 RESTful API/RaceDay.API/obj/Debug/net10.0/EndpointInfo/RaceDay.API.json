@@ -25,10 +25,58 @@
         }
       }
     },
+    "/api/database-read-test/sample-records": {
+      "get": {
+        "tags": [
+          "DatabaseReadTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/database-test": {
       "get": {
         "tags": [
           "DatabaseTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/events/{id}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -118,6 +166,9 @@
     },
     {
       "name": "DatabaseTest"
+    },
+    {
+      "name": "Events"
     },
     {
       "name": "WeatherForecast"

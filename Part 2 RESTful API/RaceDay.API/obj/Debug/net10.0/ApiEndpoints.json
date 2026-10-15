@@ -10,6 +10,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RaceDay.API.Controllers.DatabaseReadTestController",
+    "Method": "GetSampleRecords",
+    "RelativePath": "api/database-read-test/sample-records",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RaceDay.API.Controllers.DatabaseTestController",
     "Method": "TestConnection",
     "RelativePath": "api/database-test",
@@ -17,6 +27,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceDay.API.Controllers.EventsController",
+    "Method": "GetEvents",
+    "RelativePath": "api/events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceDay.API.Controllers.EventsController",
+    "Method": "GetEventById",
+    "RelativePath": "api/events/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

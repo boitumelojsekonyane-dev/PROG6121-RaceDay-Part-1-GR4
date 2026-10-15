@@ -52,6 +52,29 @@ builder.Services
 
 var app = builder.Build();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager =
+        scope.ServiceProvider.GetRequiredService<
+            Microsoft.AspNetCore.Identity.RoleManager<
+                Microsoft.AspNetCore.Identity.IdentityRole>>();
+
+    if (!await roleManager.RoleExistsAsync("Participant"))
+    {
+        var result = await roleManager.CreateAsync(
+            new Microsoft.AspNetCore.Identity.IdentityRole("Participant"));
+
+        if (!result.Succeeded)
+        {
+            throw new InvalidOperationException(
+                "Failed to create Participant role: " +
+                string.Join("; ", result.Errors.Select(e => e.Description)));
+        }
+    }
+}
+
+
 // Configure development services
 if (app.Environment.IsDevelopment())
 {

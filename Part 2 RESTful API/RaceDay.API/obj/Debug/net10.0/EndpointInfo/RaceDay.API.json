@@ -13,6 +13,38 @@
     }
   ],
   "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/database-read-test": {
       "get": {
         "tags": [
@@ -373,6 +405,90 @@
   },
   "components": {
     "schemas": {
+      "RegisterRequest": {
+        "required": [
+          "firstName",
+          "surname",
+          "email",
+          "userName",
+          "phoneNumber",
+          "emergencyContact",
+          "dateOfBirth",
+          "gender",
+          "province",
+          "password",
+          "confirmPassword"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "surname": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "userName": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string"
+          },
+          "phoneNumber": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "emergencyContact": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "identityNumber": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "passportNumber": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "gender": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "province": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        }
+      },
       "WeatherForecast": {
         "type": "object",
         "properties": {
@@ -407,6 +523,9 @@
     }
   },
   "tags": [
+    {
+      "name": "Auth"
+    },
     {
       "name": "DatabaseReadTest"
     },

@@ -1,6 +1,9 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RaceDay.API.Data;
 using RaceDay.API.Identity;
 
@@ -18,13 +21,30 @@ var connectionString = builder.Configuration
     ?? throw new InvalidOperationException(
         "RaceDayConnection was not found.");
 
-// Existing RACEDAY database context
-builder.Services.AddDbContext<RaceDayDbContext>(options =>
-    options.UseSqlServer(connectionString));
 
-// New authentication database context
-builder.Services.AddDbContext<RaceDayIdentityDbContext>(options =>
-    options.UseSqlServer(connectionString));
+// Create one SQL Server connection per request scope.
+builder.Services.AddScoped<SqlConnection>(
+    _ => new SqlConnection(connectionString));
+
+// Both DbContexts use the same scoped connection.
+builder.Services.AddDbContext<RaceDayDbContext>(
+    (serviceProvider, options) =>
+    {
+        var connection =
+            serviceProvider.GetRequiredService<SqlConnection>();
+
+        options.UseSqlServer(connection);
+    });
+
+builder.Services.AddDbContext<RaceDayIdentityDbContext>(
+    (serviceProvider, options) =>
+    {
+        var connection =
+            serviceProvider.GetRequiredService<SqlConnection>();
+
+        options.UseSqlServer(connection);
+    });
+
 
 builder.Services.AddDataProtection();
 
@@ -50,7 +70,63 @@ builder.Services
     .AddEntityFrameworkStores<RaceDayIdentityDbContext>()
     .AddDefaultTokenProviders();
 
+
+builder.Services.AddScoped<
+    RaceDay.API.Services.ParticipantRegistrationService>();
+
+
+
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException(
+        "JWT signing key is missing from configuration.");
+
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]
+    ?? throw new InvalidOperationException(
+        "JWT issuer is missing from configuration.");
+
+var jwtAudience = builder.Configuration["Jwt:Audience"]
+    ?? throw new InvalidOperationException(
+        "JWT audience is missing from configuration.");
+
+var signingKey = Convert.FromBase64String(jwtKey);
+
+if (signingKey.Length < 32)
+{
+    throw new InvalidOperationException(
+        "JWT signing key must contain at least 32 bytes.");
+}
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.MapInboundClaims = false;
+
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtIssuer,
+
+                ValidateAudience = true,
+                ValidAudience = jwtAudience,
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(signingKey),
+
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.FromMinutes(1),
+
+                RoleClaimType = "role",
+                NameClaimType = "sub"
+            };
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
+
 
 
 using (var scope = app.Services.CreateScope())

@@ -26,6 +26,8 @@ namespace RaceDay.API.Data
 
         public DbSet<Weather> Weather { get; set; } = null!;
 
+        public DbSet<Result> Results { get; set; } = null!;
 
+    
     }
-}
+}       

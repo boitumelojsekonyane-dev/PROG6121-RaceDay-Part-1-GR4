@@ -24,6 +24,8 @@ namespace RaceDay.API.Data
 
         public DbSet<RaceDay.API.Models.Route> Routes { get; set; } = null!;
 
+        public DbSet<Weather> Weather { get; set; } = null!;
+
 
     }
 }

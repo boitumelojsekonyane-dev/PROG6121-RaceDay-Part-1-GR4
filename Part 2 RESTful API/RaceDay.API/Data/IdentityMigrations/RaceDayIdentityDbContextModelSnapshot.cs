@@ -218,6 +218,10 @@ namespace RaceDay.API.Data.IdentityMigrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AdminID")
+                        .IsUnique()
+                        .HasFilter("[AdminID] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -226,7 +230,14 @@ namespace RaceDay.API.Data.IdentityMigrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.HasIndex("ParticipantID")
+                        .IsUnique()
+                        .HasFilter("[ParticipantID] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_AspNetUsers_ProfileLink", "([ParticipantID] IS NOT NULL AND [AdminID] IS NULL) OR ([ParticipantID] IS NULL AND [AdminID] IS NOT NULL)");
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

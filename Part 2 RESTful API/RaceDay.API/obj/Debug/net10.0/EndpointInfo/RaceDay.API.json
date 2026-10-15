@@ -49,6 +49,64 @@
         }
       }
     },
+    "/api/events/{eventId}/categories": {
+      "get": {
+        "tags": [
+          "EventCategories"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/events/{eventId}/categories/{categoryId}": {
+      "get": {
+        "tags": [
+          "EventCategories"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/events": {
       "get": {
         "tags": [
@@ -166,6 +224,9 @@
     },
     {
       "name": "DatabaseTest"
+    },
+    {
+      "name": "EventCategories"
     },
     {
       "name": "Events"

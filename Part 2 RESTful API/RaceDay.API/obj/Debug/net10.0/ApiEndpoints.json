@@ -40,6 +40,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RaceDay.API.Controllers.EventCategoriesController",
+    "Method": "GetCategories",
+    "RelativePath": "api/events/{eventId}/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceDay.API.Controllers.EventCategoriesController",
+    "Method": "GetCategoryById",
+    "RelativePath": "api/events/{eventId}/categories/{categoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RaceDay.API.Controllers.EventsController",
     "Method": "GetEventById",
     "RelativePath": "api/events/{id}",

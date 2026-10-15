@@ -21,5 +21,9 @@ namespace RaceDay.API.Data
         public DbSet<EventCategory> EventCategories { get; set; } = null!;
 
         public DbSet<Enrolment> Enrolments { get; set; } = null!;
+
+        public DbSet<RaceDay.API.Models.Route> Routes { get; set; } = null!;
+
+
     }
 }

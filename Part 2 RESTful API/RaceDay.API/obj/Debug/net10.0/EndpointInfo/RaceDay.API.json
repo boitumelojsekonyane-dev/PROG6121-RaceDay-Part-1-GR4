@@ -49,6 +49,30 @@
         }
       }
     },
+    "/api/enrolments/event/{eventId}/count": {
+      "get": {
+        "tags": [
+          "Enrolments"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/events/{eventId}/categories": {
       "get": {
         "tags": [
@@ -388,6 +412,9 @@
     },
     {
       "name": "DatabaseTest"
+    },
+    {
+      "name": "Enrolments"
     },
     {
       "name": "EventCategories"

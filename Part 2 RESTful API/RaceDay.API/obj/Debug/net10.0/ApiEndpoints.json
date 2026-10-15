@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "RaceDay.API.Controllers.DatabaseReadTestController",
+    "Method": "TestDatabaseRead",
+    "RelativePath": "api/database-read-test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RaceDay.API.Controllers.DatabaseTestController",
     "Method": "TestConnection",
     "RelativePath": "api/database-test",

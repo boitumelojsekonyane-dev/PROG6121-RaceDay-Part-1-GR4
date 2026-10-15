@@ -13,6 +13,18 @@
     }
   ],
   "paths": {
+    "/api/database-read-test": {
+      "get": {
+        "tags": [
+          "DatabaseReadTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/database-test": {
       "get": {
         "tags": [
@@ -101,6 +113,9 @@
     }
   },
   "tags": [
+    {
+      "name": "DatabaseReadTest"
+    },
     {
       "name": "DatabaseTest"
     },

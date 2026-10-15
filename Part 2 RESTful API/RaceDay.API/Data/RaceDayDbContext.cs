@@ -19,5 +19,7 @@ namespace RaceDay.API.Data
         public DbSet<Event> Events { get; set; } = null!;
 
         public DbSet<EventCategory> EventCategories { get; set; } = null!;
+
+        public DbSet<Enrolment> Enrolments { get; set; } = null!;
     }
 }

@@ -45,6 +45,7 @@ Accept: application/json
 
 ###
 
+//Test for unauthorized access to the participant endpoint
 GET {{RaceDay.API_HostAddress}}/api/auth-test/participant
 Accept: application/json
 
@@ -52,6 +53,7 @@ Accept: application/json
 
 ###
 
+//Test for authorized access to the participant endpoint
 GET {{RaceDay.API_HostAddress}}/api/auth-test/participant
 Authorization: Bearer {{jwtToken}}
 Accept: application/json

@@ -1,5 +1,6 @@
 
-@RaceDay.API_HostAddress = http://localhost:5029
+@RaceDay.API_HostAddress = https://localhost:7255
+@jwtToken = REPLACE_WITH_FRESH_JWT_TOKEN
 
 GET {{RaceDay.API_HostAddress}}/api/events
 Accept: application/json
@@ -21,8 +22,8 @@ Content-Type: application/json
   "passportNumber": "TESTPASS001",
   "gender": "Female",
   "province": "Gauteng",
-  "password": "RaceDay@2026!",
-  "confirmPassword": "RaceDay@2026!"
+  "password": "REPLACE_WITH_ACTUAL_PASSWORD",
+  "confirmPassword": "REPLACE_WITH_ACTUAL_CONFIRM_PASSWORD" 
 }
 
 ###
@@ -36,7 +37,25 @@ Accept: application/json
 
 {
   "email": "testrunner01@example.com",
-  "password": "RaceDay@2026!"
+  "password": "REPLACE_WITH_ACTUAL_PASSWORD"
 }
 
 ###
+
+
+###
+
+GET {{RaceDay.API_HostAddress}}/api/auth-test/participant
+Accept: application/json
+
+###
+
+###
+
+GET {{RaceDay.API_HostAddress}}/api/auth-test/participant
+Authorization: Bearer {{jwtToken}}
+Accept: application/json
+
+###
+
+

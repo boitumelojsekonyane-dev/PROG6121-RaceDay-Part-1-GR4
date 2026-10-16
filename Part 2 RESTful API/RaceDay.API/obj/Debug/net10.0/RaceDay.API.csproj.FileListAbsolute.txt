@@ -441,4 +441,4 @@ C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 REST
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.API\obj\Debug\net10.0\ref\RaceDay.API.dll
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.API\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.API\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.API\obj\Debug\net10.0\compressed\c2yf7egep4-{0}-rmhob1b9ix-rmhob1b9ix.gz
+C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.API\obj\Debug\net10.0\compressed\c2yf7egep4-{0}-65nz641tj0-65nz641tj0.gz

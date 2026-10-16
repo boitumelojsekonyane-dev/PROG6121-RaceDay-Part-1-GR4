@@ -124,6 +124,7 @@ builder.Services
                 NameClaimType = "sub"
             };
     });
+        
 
 builder.Services.AddAuthorization();
 

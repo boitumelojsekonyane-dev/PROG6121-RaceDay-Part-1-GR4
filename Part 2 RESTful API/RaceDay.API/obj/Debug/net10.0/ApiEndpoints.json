@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "RaceDay.API.Controllers.AuthTestController",
+    "Method": "ParticipantOnly",
+    "RelativePath": "api/auth-test/participant",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RaceDay.API.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/auth/login",

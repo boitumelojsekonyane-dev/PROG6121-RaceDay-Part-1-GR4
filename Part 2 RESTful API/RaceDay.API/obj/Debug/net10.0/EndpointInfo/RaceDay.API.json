@@ -77,6 +77,18 @@
         }
       }
     },
+    "/api/auth-test/participant": {
+      "get": {
+        "tags": [
+          "AuthTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/database-read-test": {
       "get": {
         "tags": [
@@ -572,6 +584,9 @@
   "tags": [
     {
       "name": "Auth"
+    },
+    {
+      "name": "AuthTest"
     },
     {
       "name": "DatabaseReadTest"

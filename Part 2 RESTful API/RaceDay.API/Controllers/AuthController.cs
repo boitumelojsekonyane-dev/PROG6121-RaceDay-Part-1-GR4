@@ -113,5 +113,71 @@ namespace RaceDay.API.Controllers
                 TokenType = "Bearer"
             });
         }
+
+
+        // POST: api/auth/organiser/login
+        [HttpPost("organiser/login")]
+        public async Task<IActionResult> OrganiserLogin(
+            [FromBody] LoginRequest request)
+        {
+            var email = request.Email?.Trim();
+
+            if (string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(request.Password))
+            {
+                return Unauthorized(new
+                {
+                    Message = "Invalid email or password."
+                });
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null ||
+                !user.AdminID.HasValue ||
+                user.ParticipantID.HasValue ||
+                !await _userManager.IsInRoleAsync(user, "Organiser"))
+            {
+                return Unauthorized(new
+                {
+                    Message = "Invalid email or password."
+                });
+            }
+
+            if (await _userManager.IsLockedOutAsync(user))
+            {
+                return Unauthorized(new
+                {
+                    Message = "Invalid email or password."
+                });
+            }
+
+            var validPassword =
+                await _userManager.CheckPasswordAsync(
+                    user, request.Password);
+
+            if (!validPassword)
+            {
+                await _userManager.AccessFailedAsync(user);
+
+                return Unauthorized(new
+                {
+                    Message = "Invalid email or password."
+                });
+            }
+
+            await _userManager.ResetAccessFailedCountAsync(user);
+
+            var token =
+                await _jwtTokenService.GenerateTokenAsync(user);
+
+            return Ok(new
+            {
+                Message = "Organiser login successful.",
+                Token = token,
+                TokenType = "Bearer"
+            });
+        }
+
     }
 }

@@ -1,7 +1,6 @@
 
 @RaceDay.API_HostAddress = https://localhost:7255
-@jwtToken = REPLACE_WITH_FRESH_JWT_TOKEN
-
+@jwtToken = PARTICIPANTS_TOKEN
 GET {{RaceDay.API_HostAddress}}/api/events
 Accept: application/json
 
@@ -37,7 +36,7 @@ Accept: application/json
 
 {
   "email": "testrunner01@example.com",
-  "password": "REPLACE_WITH_ACTUAL_PASSWORD"
+  "password": "PARTICIPANTS_PASSWORD"
 }
 
 ###
@@ -59,5 +58,245 @@ Authorization: Bearer {{jwtToken}}
 Accept: application/json
 
 ###
+
+###
+//Test for authorized access to the admin endpoint
+POST https://localhost:7255/api/enrolments
+Authorization: Bearer {{jwtToken}}
+Content-Type: application/json
+
+{
+  "eventCategoryId": 2
+}
+
+###
+
+
+###
+//Testing if an event's enrolment is either closed or still open
+POST {{RaceDay.API_HostAddress}}/api/enrolments
+Authorization: Bearer {{jwtToken}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "eventCategoryID": 1
+}
+
+###
+
+
+###
+
+POST {{RaceDay.API_HostAddress}}/api/enrolments
+Authorization: Bearer {{jwtToken}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "eventCategoryID": 4
+}
+
+###
+
+
+###
+
+POST {{RaceDay.API_HostAddress}}/api/enrolments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "eventCategoryID": 6
+}
+
+###
+
+
+### Organiser Login Test
+POST https://localhost:7255/api/auth/organiser/login
+Content-Type: application/json
+
+{
+  "email": "thabo.mokoena@raceday.co.za",
+  "password": "ORGANISERS_PASSWORD"
+}
+
+
+
+### Test Organiser Access to Participant Enrolments
+POST https://localhost:7255/api/enrolments
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "eventCategoryId": 4
+}
+
+
+### Test Organiser Event Creation
+POST https://localhost:7255/api/events
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "eventTypeID": 1,
+  "title": "RACEDAY Summer Fun Run 2026",
+  "description": "A community running event for participants of all fitness levels.",
+  "eventDate": "2026-12-12",
+  "startTime": "07:00:00",
+  "location": "Benoni, Gauteng",
+  "distanceKm": 10,
+  "registrationOpens": "2026-10-20",
+  "registrationCloses": "2026-12-05",
+  "entryFee": 150.00
+}
+
+
+### Test Participant Cannot Create Events
+POST https://localhost:7255/api/events
+Authorization: Bearer PARTICIPANTS_TOKEN
+Content-Type: application/json
+
+{
+  "eventTypeID": 1,
+  "title": "Unauthorised Test Event",
+  "description": "Testing whether Participants are prevented from creating events.",
+  "eventDate": "2026-12-20",
+  "startTime": "07:00:00",
+  "location": "Pretoria, Gauteng",
+  "distanceKm": 5,
+  "registrationOpens": "2026-10-20",
+  "registrationCloses": "2026-12-15",
+  "entryFee": 100.00
+}
+
+
+### Test Organiser Event Update
+PUT https://localhost:7255/api/events/4
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "eventTypeID": 1,
+  "title": "RACEDAY Summer Fun Run 2026 - Updated",
+  "description": "An exciting community running event featuring a 10km route for runners of all fitness levels.",
+  "eventDate": "2026-12-12",
+  "startTime": "06:30:00",
+  "location": "Benoni, Gauteng",
+  "distanceKm": 10,
+  "registrationOpens": "2026-10-20",
+  "registrationCloses": "2026-12-05",
+  "entryFee": 175.00
+}
+
+
+### Test Organiser Cannot Edit Another Organiser's Event
+PUT https://localhost:7255/api/events/2
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "eventTypeID": 2,
+  "title": "Unauthorised Event Update Test",
+  "description": "Testing whether Organiser 1 can edit an event belonging to Organiser 2.",
+  "eventDate": "2026-11-07",
+  "startTime": "07:00:00",
+  "location": "Pretoria, Gauteng",
+  "distanceKm": 5,
+  "registrationOpens": "2026-10-20",
+  "registrationCloses": "2026-10-31",
+  "entryFee": 100.00
+}
+
+
+### Test Protected Event Deletion
+DELETE https://localhost:7255/api/events/1
+Authorization: Bearer ORGANISERS_TOKEN
+
+
+### Test Organiser Cannot Delete Another Organiser's Event
+DELETE https://localhost:7255/api/events/2
+Authorization: Bearer ORGANISERS_TOKEN
+
+### Create Temporary Event for Deletion Test
+POST https://localhost:7255/api/events
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "eventTypeID": 1,
+  "title": "RACEDAY Temporary Deletion Test",
+  "description": "Temporary event created exclusively to test the DELETE endpoint.",
+  "eventDate": "2026-12-19",
+  "startTime": "08:00:00",
+  "location": "Benoni, Gauteng",
+  "distanceKm": 5,
+  "registrationOpens": "2026-10-20",
+  "registrationCloses": "2026-12-12",
+  "entryFee": 0
+}
+
+
+### Test Successful Event Deletion
+DELETE https://localhost:7255/api/events/5
+Authorization: Bearer ORGANISERS_TOKEN
+
+
+### Create Event Category
+POST https://localhost:7255/api/events/4/categories
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "categoryName": "10km Open Run",
+  "description": "Open category for runners aged 18 and above.",
+  "minAge": 18,
+  "maxAge": null,
+  "distanceKm": 10
+}
+
+
+### Capture Participant Race Result
+POST https://localhost:7255/api/results
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "enrolmentID": 10,
+  "positionCategory": 3,
+  "overallPosition": 12,
+  "paceMinKm": 5.5,
+  "startTime": "06:00:00",
+  "finishTime": "06:55:00"
+}
+
+### Create Route for Event 4
+POST https://localhost:7255/api/events/4/routes
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "routeName": "RACEDAY Summer 10km Route",
+  "description": "10km running route in Benoni, Gauteng.",
+  "routeStartKm": 0,
+  "routeFinishKm": 10
+}
+
+
+### Create Weather Forecast for Event 4
+POST https://localhost:7255/api/events/4/weather
+Authorization: Bearer ORGANISERS_TOKEN
+Content-Type: application/json
+
+{
+  "forecastDate": "2026-12-12",
+  "forecastTime": "06:30:00",
+  "temperatureC": 22.5,
+  "rainProbability": 20,
+  "source": "RACEDAY Manual Forecast",
+  "notes": "Sample forecast for API testing, not live weather data."
+}
+
 
 

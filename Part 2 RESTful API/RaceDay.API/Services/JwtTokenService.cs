@@ -73,6 +73,15 @@ namespace RaceDay.API.Services
                     user.ParticipantID.Value.ToString()));
             }
 
+
+            if (user.AdminID.HasValue)
+            {
+                claims.Add(new Claim(
+                    "adminId",
+                    user.AdminID.Value.ToString()));
+            }
+
+
             foreach (var role in roles)
             {
                 claims.Add(new Claim("role", role));

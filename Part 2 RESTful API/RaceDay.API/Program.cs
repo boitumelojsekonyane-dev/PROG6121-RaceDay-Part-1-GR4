@@ -71,11 +71,17 @@ builder.Services
     .AddDefaultTokenProviders();
 
 
+
 builder.Services.AddScoped<
     RaceDay.API.Services.ParticipantRegistrationService>();
 
+builder.Services.AddScoped<
+    RaceDay.API.Services.JwtTokenService>();
 
-builder.Services.AddScoped<RaceDay.API.Services.JwtTokenService>();
+// Service for securely provisioning Organiser accounts.
+builder.Services.AddScoped<
+    RaceDay.API.Services.OrganiserProvisioningService>();
+
 
 
 var jwtKey = builder.Configuration["Jwt:Key"]
@@ -151,14 +157,34 @@ using (var scope = app.Services.CreateScope())
                 string.Join("; ", result.Errors.Select(e => e.Description)));
         }
     }
+
+    // Create the Organiser role if it does not exist.
+    if (!await roleManager.RoleExistsAsync("Organiser"))
+    {
+        var result = await roleManager.CreateAsync(
+            new IdentityRole("Organiser"));
+
+        if (!result.Succeeded)
+        {
+            throw new InvalidOperationException(
+                "Failed to create Organiser role: " +
+                string.Join("; ",
+                    result.Errors.Select(e => e.Description)));
+        }
+    }
+
 }
 
 
 // Configure development services
+
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+
 
 // HTTPS redirection
 app.UseHttpsRedirection();

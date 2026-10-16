@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDay.API.Data;
+using Microsoft.AspNetCore.Authorization;
+using RaceDay.API.DTOs;
+using RaceDay.API.Models;
 
 namespace RaceDay.API.Controllers
 {
@@ -100,5 +103,90 @@ namespace RaceDay.API.Controllers
 
             return Ok(results);
         }
+
+
+        // POST: api/results
+        [HttpPost]
+        [Authorize(Roles = "Organiser")]
+        public async Task<IActionResult> CreateResult(
+            [FromBody] CreateResultRequest request)
+        {
+            var adminClaim = User.FindFirst("adminId")?.Value;
+
+            if (!int.TryParse(adminClaim, out int adminId))
+                return Forbid();
+
+            if (!request.FinishTime.HasValue)
+            {
+                return BadRequest(new
+                {
+                    Message = "Finish time is required."
+                });
+            }
+
+            // Locate the enrolment and its associated event.
+            var enrolment = await _context.Enrolments
+                .AsNoTracking()
+                .Where(en => en.EnrolmentID == request.EnrolmentID)
+                .Select(en => new
+                {
+                    en.EnrolmentID,
+                    EventAdminID = _context.EventCategories
+                        .Where(c => c.EventCategoryID == en.EventCategoryID)
+                        .Join(
+                            _context.Events,
+                            c => c.EventID,
+                            e => e.EventID,
+                            (c, e) => e.AdminID)
+                        .FirstOrDefault()
+                })
+                .FirstOrDefaultAsync();
+
+            if (enrolment == null)
+                return NotFound(new { Message = "Enrolment not found." });
+
+            // An Organiser may only capture results for their own events.
+            if (enrolment.EventAdminID != adminId)
+                return Forbid();
+
+            // Prevent multiple results for the same enrolment.
+            bool resultExists = await _context.Results
+                .AnyAsync(r => r.EnrolmentID == request.EnrolmentID);
+
+            if (resultExists)
+            {
+                return Conflict(new
+                {
+                    Message = "A result already exists for this enrolment."
+                });
+            }
+
+            var result = new Result
+            {
+                EnrolmentID = request.EnrolmentID,
+                PositionCategory = request.PositionCategory,
+                OverallPosition = request.OverallPosition,
+                PaceMinKm = request.PaceMinKm,
+                StartTime = request.StartTime,
+                FinishTime = request.FinishTime.Value,
+                CapturedByAdminID = adminId
+            };
+
+            _context.Results.Add(result);
+            await _context.SaveChangesAsync();
+
+            return StatusCode(201, new
+            {
+                Message = "Result captured successfully.",
+                result.ResultID,
+                result.EnrolmentID,
+                result.PositionCategory,
+                result.OverallPosition,
+                result.FinishTime,
+                result.CapturedByAdminID
+            });
+            
+        }
+
     }
 }

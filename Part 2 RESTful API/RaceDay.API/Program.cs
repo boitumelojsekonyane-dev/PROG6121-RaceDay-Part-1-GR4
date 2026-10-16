@@ -75,6 +75,8 @@ builder.Services.AddScoped<
     RaceDay.API.Services.ParticipantRegistrationService>();
 
 
+builder.Services.AddScoped<RaceDay.API.Services.JwtTokenService>();
+
 
 var jwtKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException(

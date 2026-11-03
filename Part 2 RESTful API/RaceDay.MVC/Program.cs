@@ -4,15 +4,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add MVC services
 builder.Services.AddControllersWithViews();
 
-// Configure communication with RaceDay.API
-builder.Services.AddHttpClient("RaceDayAPI", client =>
-{
-    var apiUrl = builder.Configuration["ApiSettings:BaseUrl"]
-        ?? throw new InvalidOperationException(
-            "API BaseUrl is not configured.");
 
-    client.BaseAddress = new Uri(apiUrl);
-});
+builder.Services.AddHttpClient<
+    RaceDay.MVC.Services.EventApiService>(client =>
+    {
+        var apiUrl =
+            builder.Configuration["ApiSettings:BaseUrl"]
+            ?? throw new InvalidOperationException(
+                "API BaseUrl is not configured.");
+
+        client.BaseAddress = new Uri(apiUrl);
+    });
+
 
 // Enable session management
 builder.Services.AddDistributedMemoryCache();

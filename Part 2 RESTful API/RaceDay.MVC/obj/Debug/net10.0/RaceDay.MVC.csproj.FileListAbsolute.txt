@@ -30,8 +30,6 @@ C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 REST
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\scopedcss\bundle\RaceDay.MVC.styles.css
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\scopedcss\projectbundle\RaceDay.MVC.bundle.scp.css
-C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\ox0xgrem22-{0}-hbxp78vwan-hbxp78vwan.gz
-C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\7ukyk72176-{0}-8dqbm6r146-8dqbm6r146.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\tshhundvo5-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\xcq2afdoel-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\h1aumdsabc-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
@@ -94,8 +92,6 @@ C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 REST
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\k1dlk1lixm-{0}-muycvpuwrr-muycvpuwrr.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\rw826dyxge-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\7f577elp93-{0}-mlv21k5csn-mlv21k5csn.gz
-C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\dbr439kfx7-{0}-pmpabpnd9a-pmpabpnd9a.gz
-C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\tgfwios0wi-{0}-o299wl1apk-o299wl1apk.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\4qxhih5kgn-{0}-u33ift5bwq-u33ift5bwq.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\xzq9sdo1gi-{0}-u33ift5bwq-u33ift5bwq.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\staticwebassets.build.json
@@ -110,3 +106,7 @@ C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 REST
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\RaceDay.MVC.genruntimeconfig.cache
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\ref\RaceDay.MVC.dll
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\RaceDay..103F391E.Up2Date
+C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\ox0xgrem22-{0}-s9y91u5nkn-s9y91u5nkn.gz
+C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\7ukyk72176-{0}-h9upn35mn6-h9upn35mn6.gz
+C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\dbr439kfx7-{0}-lvkpp2i49p-lvkpp2i49p.gz
+C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\tgfwios0wi-{0}-scyj3pnqhf-scyj3pnqhf.gz

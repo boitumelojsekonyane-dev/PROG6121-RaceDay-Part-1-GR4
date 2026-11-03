@@ -1,8 +1,93 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using System.Text.Json
+
+@{
+    ViewData["Title"] = "RACEDAY - Upcoming Events";
+
+    var events = ViewBag.Events as List<JsonElement>
+        ?? new List<JsonElement>();
+
+    string GetValue(JsonElement item, string name)
+    {
+        if (item.ValueKind == JsonValueKind.Object &&
+            item.TryGetProperty(name, out var value))
+        {
+            return value.ToString();
+        }
+
+        return "Not available";
+    }
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">
+            Welcome to RACEDAY
+        </h1>
+
+        <p class="lead">
+            Discover events. Challenge yourself.
+            Celebrate every finish line.
+        </p>
+    </div>
+
+    <h2 class="mb-4">Available Events</h2>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    else if (events.Count == 0)
+    {
+        <div class="alert alert-info">
+            No events are currently available.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @foreach (var raceEvent in events)
+            {
+                <div class="col-md-4">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                @GetValue(raceEvent, "title")
+                            </h5>
+
+                            <p class="card-text">
+                                @GetValue(raceEvent, "description")
+                            </p>
+
+                            <p>
+                                <strong>Date:</strong>
+                                @GetValue(raceEvent, "eventDate")
+                            </p>
+
+                            <p>
+                                <strong>Location:</strong>
+                                @GetValue(raceEvent, "location")
+                            </p>
+
+                            <p>
+                                <strong>Distance:</strong>
+                                @GetValue(raceEvent, "distanceKm") km
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
 </div>

@@ -34,25 +34,59 @@ namespace RaceDay.MVC.Controllers
             return View(new RegisterViewModel());
         }
 
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(
-            RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            // Validate the registration form first.
             if (!ModelState.IsValid)
+            {
                 return View(model);
+            }
+
+            // Combine day, month and year into DateOfBirth.
+            if (model.BirthDay.HasValue &&
+                model.BirthMonth.HasValue &&
+                model.BirthYear.HasValue)
+            {
+                model.DateOfBirth = new DateTime(
+                    model.BirthYear.Value,
+                    model.BirthMonth.Value,
+                    model.BirthDay.Value);
+            }
+
+            // Transfer the custom gender value when selected.
+            if (model.Gender == "Other")
+            {
+                model.Gender = model.OtherGender!.Trim();
+            }
+
+            // Keep only the selected identification document.
+            if (model.IdentificationType == "SouthAfricanID")
+            {
+                model.IdentityNumber = model.IdentityNumber?.Trim();
+                model.PassportNumber = null;
+            }
+            else if (model.IdentificationType == "Passport")
+            {
+                model.PassportNumber = model.PassportNumber?.Trim();
+                model.IdentityNumber = null;
+            }
 
             try
             {
-                bool success =
-                    await _authService.RegisterAsync(model);
+                bool success = await _authService.RegisterAsync(model);
 
                 if (!success)
                 {
                     ModelState.AddModelError(
                         "",
-                        "Registration could not be completed. Please check your details.");
+                        "Registration could not be completed. " +
+                        "Please check your details."
+                    );
+
                     return View(model);
                 }
 
@@ -63,16 +97,20 @@ namespace RaceDay.MVC.Controllers
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError(ex,
-                    "API registration request failed.");
+                _logger.LogError(
+                    ex,
+                    "API registration request failed."
+                );
 
                 ModelState.AddModelError(
                     "",
-                    "Registration is temporarily unavailable.");
+                    "Registration is temporarily unavailable."
+                );
 
                 return View(model);
             }
         }
+
 
         [HttpGet]
         [AllowAnonymous]

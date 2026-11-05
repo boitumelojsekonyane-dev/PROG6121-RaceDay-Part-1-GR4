@@ -2,12 +2,12 @@
 
 @{
     ViewData["Title"] = "Register - RACEDAY";
+    int currentYear = DateTime.Today.Year;
 }
 
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-9">
-
             <div class="card shadow border-0 rounded-4">
                 <div class="card-body p-4 p-md-5">
 
@@ -17,10 +17,6 @@
                             Your race. Your journey. Your finish line.
                         </p>
                         <h2 class="h4">Create Participant Account</h2>
-                        <p>
-                            Join the RACEDAY community and
-                            start your racing journey.
-                        </p>
                     </div>
 
                     <form asp-controller="Account"
@@ -63,36 +59,93 @@
                                       class="text-danger"></span>
                             </div>
 
-                            <div class="col-md-6">
-                                <label asp-for="DateOfBirth"
-                                       class="form-label"></label>
-                                <input asp-for="DateOfBirth"
-                                       type="date"
-                                       class="form-control" />
-                                <span asp-validation-for="DateOfBirth"
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">
+                                    Date of Birth
+                                </label>
+
+                                <div class="row g-2">
+
+                                    <div class="col-md-4">
+                                        <select asp-for="BirthDay"
+                                                class="form-select">
+                                            <option value="">Day</option>
+                                            @for (int day = 1; day <= 31; day++)
+                                            {
+                                                <option value="@day">@day</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <select asp-for="BirthMonth"
+                                                class="form-select">
+                                            <option value="">Month</option>
+                                            @for (int month = 1; month <= 12; month++)
+                                            {
+                                                <option value="@month">
+                                                    @(new DateTime(2000, month, 1).ToString("MMMM"))
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <select asp-for="BirthYear"
+                                                class="form-select">
+                                            <option value="">Year</option>
+                                            @for (int year = currentYear; year >= 1907; year--)
+                                            {
+                                                <option value="@year">@year</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <span asp-validation-for="BirthDay"
                                       class="text-danger"></span>
                             </div>
 
                             <div class="col-md-6">
                                 <label asp-for="Gender"
                                        class="form-label"></label>
+
                                 <select asp-for="Gender"
-                                        class="form-select">
+                                        class="form-select"
+                                        id="genderSelect">
                                     <option value="">Select gender</option>
                                     <option value="Female">Female</option>
                                     <option value="Male">Male</option>
                                     <option value="Other">Other</option>
-                                    <option value="Prefer not to say">
-                                        Prefer not to say
-                                    </option>
                                 </select>
+
                                 <span asp-validation-for="Gender"
+                                      class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6"
+                                 id="otherGenderContainer"
+                                 style="display:none;">
+
+                                <label asp-for="OtherGender"
+                                       class="form-label">
+                                    Please Specify Gender
+                                </label>
+
+                                <input asp-for="OtherGender"
+                                       class="form-control"
+                                       maxlength="20"
+                                       placeholder="Specify your gender" />
+
+                                <span asp-validation-for="OtherGender"
                                       class="text-danger"></span>
                             </div>
 
                             <div class="col-md-6">
                                 <label asp-for="Province"
                                        class="form-label"></label>
+
                                 <select asp-for="Province"
                                         class="form-select">
                                     <option value="">Select province</option>
@@ -106,6 +159,7 @@
                                     <option>Northern Cape</option>
                                     <option>Western Cape</option>
                                 </select>
+
                                 <span asp-validation-for="Province"
                                       class="text-danger"></span>
                             </div>
@@ -147,34 +201,77 @@
 
                         <h5 class="mb-3">Identification</h5>
 
-                        <p class="text-muted small">
-                            Provide either a South African ID number
-                            or a passport number.
+                        <p class="text-muted">
+                            Which identification document
+                            will you use to register?
                         </p>
 
-                        <div class="row g-3 mb-4">
+                        <div class="row g-3 mb-3">
 
                             <div class="col-md-6">
-                                <label asp-for="IdentityNumber"
-                                       class="form-label"></label>
-                                <input asp-for="IdentityNumber"
-                                       class="form-control" />
-                                <span asp-validation-for="IdentityNumber"
-                                      class="text-danger"></span>
+                                <input asp-for="IdentificationType"
+                                       type="radio"
+                                       value="SouthAfricanID"
+                                       class="btn-check"
+                                       id="idChoice"
+                                       autocomplete="off" />
+
+                                <label class="btn btn-outline-dark w-100 py-3"
+                                       for="idChoice">
+                                    South African ID
+                                </label>
                             </div>
 
                             <div class="col-md-6">
-                                <label asp-for="PassportNumber"
-                                       class="form-label"></label>
-                                <input asp-for="PassportNumber"
-                                       class="form-control" />
-                                <span asp-validation-for="PassportNumber"
-                                      class="text-danger"></span>
+                                <input asp-for="IdentificationType"
+                                       type="radio"
+                                       value="Passport"
+                                       class="btn-check"
+                                       id="passportChoice"
+                                       autocomplete="off" />
+
+                                <label class="btn btn-outline-dark w-100 py-3"
+                                       for="passportChoice">
+                                    Passport
+                                </label>
                             </div>
 
                         </div>
 
-                        <h5 class="mb-3">Account Security</h5>
+                        <span asp-validation-for="IdentificationType"
+                              class="text-danger"></span>
+
+                        <div id="idNumberContainer"
+                             class="mb-3"
+                             style="display:none;">
+
+                            <label asp-for="IdentityNumber"
+                                   class="form-label"></label>
+
+                            <input asp-for="IdentityNumber"
+                                   class="form-control"
+                                   placeholder="Enter SA ID number" />
+
+                            <span asp-validation-for="IdentityNumber"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div id="passportContainer"
+                             class="mb-3"
+                             style="display:none;">
+
+                            <label asp-for="PassportNumber"
+                                   class="form-label"></label>
+
+                            <input asp-for="PassportNumber"
+                                   class="form-control"
+                                   placeholder="Enter passport number" />
+
+                            <span asp-validation-for="PassportNumber"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <h5 class="mb-3 mt-4">Account Security</h5>
 
                         <div class="row g-3 mb-4">
 
@@ -218,11 +315,77 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
 @section Scripts {
+
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const genderSelect =
+                document.getElementById("genderSelect");
+
+            const otherGenderContainer =
+                document.getElementById("otherGenderContainer");
+
+            const otherGenderInput =
+                document.getElementById("OtherGender");
+
+            function updateGenderField() {
+                const isOther = genderSelect.value === "Other";
+
+                otherGenderContainer.style.display =
+                    isOther ? "block" : "none";
+
+                otherGenderInput.disabled = !isOther;
+            }
+
+            genderSelect.addEventListener(
+                "change", updateGenderField);
+
+            updateGenderField();
+
+            const idChoice =
+                document.getElementById("idChoice");
+
+            const passportChoice =
+                document.getElementById("passportChoice");
+
+            const idContainer =
+                document.getElementById("idNumberContainer");
+
+            const passportContainer =
+                document.getElementById("passportContainer");
+
+            const idInput =
+                document.getElementById("IdentityNumber");
+
+            const passportInput =
+                document.getElementById("PassportNumber");
+
+            function updateIdentificationFields() {
+
+                idContainer.style.display =
+                    idChoice.checked ? "block" : "none";
+
+                passportContainer.style.display =
+                    passportChoice.checked ? "block" : "none";
+
+                idInput.disabled = !idChoice.checked;
+                passportInput.disabled = !passportChoice.checked;
+            }
+
+            idChoice.addEventListener(
+                "change", updateIdentificationFields);
+
+            passportChoice.addEventListener(
+                "change", updateIdentificationFields);
+
+            updateIdentificationFields();
+        });
+    </script>
 }

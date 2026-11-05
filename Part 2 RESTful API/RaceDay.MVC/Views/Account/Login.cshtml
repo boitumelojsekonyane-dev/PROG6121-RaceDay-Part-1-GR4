@@ -61,28 +61,48 @@
                                   class="text-danger"></span>
                         </div>
 
+                        
                         <div class="mb-4">
-                            <label asp-for="Role"
-                                   class="form-label fw-semibold">
+                            <label class="form-label fw-semibold">
                                 Account Type
                             </label>
 
-                            <select asp-for="Role"
-                                    class="form-select">
-                                <option value="">
-                                    Select account type
-                                </option>
-                                <option value="Participant">
-                                    Participant
-                                </option>
-                                <option value="Organiser">
-                                    Organiser
-                                </option>
-                            </select>
+                            <div class="row g-3">
+
+                                <div class="col-6">
+                                    <input asp-for="Role"
+                                           type="radio"
+                                           value="Participant"
+                                           class="btn-check"
+                                           id="roleParticipant"
+                                           autocomplete="off" />
+
+                                    <label class="btn btn-outline-dark w-100 py-3"
+                                           for="roleParticipant">
+                                        Participant
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <input asp-for="Role"
+                                           type="radio"
+                                           value="Organiser"
+                                           class="btn-check"
+                                           id="roleOrganiser"
+                                           autocomplete="off" />
+
+                                    <label class="btn btn-outline-dark w-100 py-3"
+                                           for="roleOrganiser">
+                                        Organiser
+                                    </label>
+                                </div>
+
+                            </div>
 
                             <span asp-validation-for="Role"
                                   class="text-danger"></span>
                         </div>
+
 
                         <button type="submit"
                                 class="btn btn-dark w-100 py-2 fw-bold">

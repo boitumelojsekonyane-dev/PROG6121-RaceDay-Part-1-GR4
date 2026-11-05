@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Access Denied - RACEDAY";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-body text-center p-5">
+
+                    <div class="mb-4">
+                        <span class="display-1">
+                            🔒
+                        </span>
+                    </div>
+
+                    <h1 class="fw-bold mb-3">
+                        Access Denied
+                    </h1>
+
+                    <p class="lead text-muted">
+                        You do not have permission
+                        to access this page.
+                    </p>
+
+                    <p>
+                        This section of RACEDAY is
+                        restricted to authorised users.
+                    </p>
+
+                    <div class="mt-4">
+
+                        @if (User.IsInRole("Participant"))
+                        {
+                            <a asp-controller="Participant"
+                               asp-action="Index"
+                               class="btn btn-dark">
+                                Return to Participant Dashboard
+                            </a>
+                        }
+                        else if (User.IsInRole("Organiser"))
+                        {
+                            <a asp-controller="Organiser"
+                               asp-action="Index"
+                               class="btn btn-dark">
+                                Return to Organiser Dashboard
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account"
+                               asp-action="Login"
+                               class="btn btn-dark">
+                                Go to Login
+                            </a>
+                        }
+
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary ms-2">
+                            Back to Home
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

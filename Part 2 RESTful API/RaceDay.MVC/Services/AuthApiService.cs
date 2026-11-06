@@ -15,29 +15,46 @@ namespace RaceDay.MVC.Services
         }
 
         // Register a new Participant
-        public async Task<bool> RegisterAsync(
-            RegisterViewModel model)
+
+        public async Task<bool> RegisterAsync(RegisterViewModel model)
         {
             var response = await _httpClient.PostAsJsonAsync(
                 "api/auth/register", model);
 
-            return response.IsSuccessStatusCode;
+            if (response.StatusCode ==
+                System.Net.HttpStatusCode.Conflict)
+            {
+                using var json =
+                    await response.Content.ReadFromJsonAsync<JsonDocument>();
+
+                string message = "An account with these details already exists.";
+
+                if (json != null &&
+                    json.RootElement.TryGetProperty(
+                        "message", out var messageElement))
+                {
+                    message = messageElement.GetString() ?? message;
+                }
+
+                throw new InvalidOperationException(message);
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException(
+                    $"Registration API returned HTTP {(int)response.StatusCode}.");
+            }
+
+            return true;
         }
 
-        // Login as Participant or Organiser
-        public async Task<string?> LoginAsync(
-            LoginViewModel model)
-        {
-            string endpoint = model.Role switch
-            {
-                "Participant" => "api/auth/login",
-                "Organiser" => "api/auth/organiser/login",
-                _ => throw new ArgumentException(
-                    "Invalid account type.")
-            };
 
+        // Login as Participant or Organiser
+
+        public async Task<string?> LoginAsync(LoginViewModel model)
+        {
             var response = await _httpClient.PostAsJsonAsync(
-                endpoint,
+                "api/auth/login",
                 new
                 {
                     model.Email,
@@ -49,8 +66,8 @@ namespace RaceDay.MVC.Services
                 return null;
             }
 
-            using var json = await response.Content
-                .ReadFromJsonAsync<JsonDocument>();
+            using var json =
+                await response.Content.ReadFromJsonAsync<JsonDocument>();
 
             if (json == null ||
                 !json.RootElement.TryGetProperty(
@@ -61,5 +78,6 @@ namespace RaceDay.MVC.Services
 
             return tokenElement.GetString();
         }
+
     }
 }

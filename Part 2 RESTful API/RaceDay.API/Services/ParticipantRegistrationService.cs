@@ -62,31 +62,47 @@ namespace RaceDay.API.Services
                     : request.PassportNumber.Trim();
 
                 // Check existing participant records.
-                var duplicateParticipant =
+
+                // Check whether the email address already exists.
+                bool duplicateEmail =
+                    await _raceDayContext.Participants
+                        .AnyAsync(p => p.Email == email) ||
+                    await _userManager.FindByEmailAsync(email) != null;
+
+                if (duplicateEmail)
+                {
+                    await transaction.RollbackAsync();
+
+                    return IdentityResult.Failed(new IdentityError
+                    {
+                        Code = "DuplicateEmail",
+                        Description = "This email address is already registered."
+                    });
+                }
+
+                // Check for other existing registration details.
+                bool duplicateParticipant =
                     await _raceDayContext.Participants.AnyAsync(p =>
-                        p.Email == email ||
                         p.UserName == userName ||
                         (identityNumber != null &&
                          p.IdentityNumber == identityNumber) ||
                         (passportNumber != null &&
                          p.PassportNumber == passportNumber));
 
-                // Check existing login accounts.
-                var duplicateIdentityUser =
-                    await _userManager.FindByEmailAsync(email) != null ||
+                bool duplicateIdentityUser =
                     await _userManager.FindByNameAsync(userName) != null;
 
                 if (duplicateParticipant || duplicateIdentityUser)
                 {
                     await transaction.RollbackAsync();
 
-                    return IdentityResult.Failed(
-                        new IdentityError
-                        {
-                            Code = "RegistrationConflict",
-                            Description = "Registration could not be completed."
-                        });
+                    return IdentityResult.Failed(new IdentityError
+                    {
+                        Code = "RegistrationConflict",
+                        Description = "An account with these details already exists."
+                    });
                 }
+
 
                 var participant = new Participant
                 {

@@ -7,6 +7,11 @@ namespace RaceDay.MVC.Models
 {
     public class RegisterViewModel : IValidatableObject
     {
+
+        [Required(ErrorMessage = "Please select an account type.")]
+        [Display(Name = "Account Type")]
+        public string AccountType { get; set; } = "Participant";
+
         [Required(ErrorMessage = "First name is required.")]
         [StringLength(50)]
         [Display(Name = "First Name")]
@@ -32,15 +37,17 @@ namespace RaceDay.MVC.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; } = string.Empty;
 
+
         [Required(ErrorMessage = "Emergency contact is required.")]
         [StringLength(100)]
         [Display(Name = "Emergency Contact")]
         public string EmergencyContact { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Date of birth is required.")]
+
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
         public DateTime DateOfBirth { get; set; }
+
 
         // Registration form date selectors
         [Range(1, 31)]
@@ -74,8 +81,10 @@ namespace RaceDay.MVC.Models
         [StringLength(50)]
         public string Province { get; set; } = string.Empty;
 
+
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
+        
         public string Password { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Confirm your password.")]
@@ -88,6 +97,15 @@ namespace RaceDay.MVC.Models
         public IEnumerable<ValidationResult> Validate(
             ValidationContext validationContext)
         {
+            //To validate the account type, we check if it is either "Participant" or "Organiser". If not, we yield a validation error.
+            if (AccountType != "Participant" &&
+                AccountType != "Organiser")
+            {
+                yield return new ValidationResult(
+                    "Please select a valid account type.",
+                    new[] { nameof(AccountType) });
+            }
+
             // Validate date of birth
             if (!BirthDay.HasValue ||
                 !BirthMonth.HasValue ||

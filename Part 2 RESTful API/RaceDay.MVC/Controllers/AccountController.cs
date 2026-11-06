@@ -40,6 +40,18 @@ namespace RaceDay.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+
+            if (model.AccountType == "Organiser")
+            {
+                ModelState.AddModelError(
+                    nameof(model.AccountType),
+                    "Organiser applications are not available yet. " +
+                    "Please return once the approval process is enabled.");
+
+                return View(model);
+            }
+
+
             // Validate the registration form first.
             if (!ModelState.IsValid)
             {
@@ -95,6 +107,14 @@ namespace RaceDay.MVC.Controllers
 
                 return RedirectToAction(nameof(Login));
             }
+
+
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }
+
             catch (HttpRequestException ex)
             {
                 _logger.LogError(
@@ -125,6 +145,7 @@ namespace RaceDay.MVC.Controllers
         public async Task<IActionResult> Login(
             LoginViewModel model)
         {
+            
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -137,7 +158,7 @@ namespace RaceDay.MVC.Controllers
                 {
                     ModelState.AddModelError(
                         "",
-                        "Invalid email, password or account type.");
+                        "Invalid email or password.");
                     return View(model);
                 }
 
@@ -155,14 +176,13 @@ namespace RaceDay.MVC.Controllers
                         "Unexpected token signing algorithm.");
                 }
 
+                // Identify the role from the validated API token.
                 var role = principal.FindFirst(
-                    "role")?.Value
-                    ?? principal.FindFirst(
-                        ClaimTypes.Role)?.Value;
+                    ClaimTypes.Role)?.Value
+                    ?? principal.FindFirst("role")?.Value;
 
-                if (role != model.Role ||
-                    (role != "Participant" &&
-                     role != "Organiser"))
+                if (role != "Participant" &&
+                    role != "Organiser")
                 {
                     ModelState.AddModelError(
                         "",
@@ -233,6 +253,7 @@ namespace RaceDay.MVC.Controllers
                 return View(model);
             }
         }
+
 
         [HttpGet]
         [AllowAnonymous]

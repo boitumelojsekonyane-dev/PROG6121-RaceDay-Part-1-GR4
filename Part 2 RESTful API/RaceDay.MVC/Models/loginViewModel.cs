@@ -14,8 +14,6 @@ namespace RaceDay.MVC.Models
         [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Please select your account type.")]
-        [Display(Name = "Account Type")]
-        public string Role { get; set; } = string.Empty;
+        
     }
 }

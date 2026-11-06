@@ -27,10 +27,57 @@
 
                         <div asp-validation-summary="All"
                              class="text-danger mb-3"></div>
+   
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Are you registering as a Participant or Organiser?
+                            </label>
+
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <input asp-for="AccountType"
+                                           type="radio"
+                                           value="Participant"
+                                           class="btn-check"
+                                           id="registerParticipant"
+                                           autocomplete="off" />
+
+                                    <label class="btn btn-outline-dark w-100 py-3"
+                                           for="registerParticipant">
+                                        Participant
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <input asp-for="AccountType"
+                                           type="radio"
+                                           value="Organiser"
+                                           class="btn-check"
+                                           id="registerOrganiser"
+                                           autocomplete="off" />
+
+                                    <label class="btn btn-outline-dark w-100 py-3"
+                                           for="registerOrganiser">
+                                        Organiser
+                                    </label>
+                                </div>
+                            </div>
+
+                            <span asp-validation-for="AccountType"
+                                  class="text-danger"></span>
+
+                            <div class="form-text mt-2">
+                                Organiser accounts require approval before
+                                event-management access is granted.
+                            </div>
+                        </div>
+
 
                         <h5 class="mb-3">Personal Information</h5>
 
                         <div class="row g-3 mb-4">
+
+
 
                             <div class="col-md-6">
                                 <label asp-for="FirstName"
@@ -196,6 +243,8 @@
                                 <span asp-validation-for="EmergencyContact"
                                       class="text-danger"></span>
                             </div>
+
+                           
 
                         </div>
 

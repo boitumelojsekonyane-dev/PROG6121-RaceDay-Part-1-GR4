@@ -55,44 +55,51 @@ namespace RaceDay.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            if (id <= 0)
-            {
-                return BadRequest();
-            }
 
-            try
-            {
-                JsonElement? eventDetails =
-                    await _eventService.GetEventByIdAsync(id);
-
-                if (!eventDetails.HasValue)
+                if (id <= 0)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
 
-                return View(eventDetails.Value);
+                try
+                {
+                    JsonElement? eventDetails =
+                        await _eventService.GetEventByIdAsync(id);
+
+                    if (!eventDetails.HasValue)
+                    {
+                        return NotFound();
+                    }
+
+                    List<JsonElement> categories =
+                        await _eventService.GetEventCategoriesAsync(id);
+
+                    ViewBag.Categories = categories;
+
+                    return View(eventDetails.Value);
+                }
+                catch (HttpRequestException ex)
+                {
+                    _logger.LogError(ex,
+                        "Unable to retrieve event {EventId}", id);
+
+                    TempData["ErrorMessage"] =
+                        "Event information is temporarily unavailable.";
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (JsonException ex)
+                {
+                    _logger.LogError(ex,
+                        "Invalid event data received for event {EventId}", id);
+
+                    TempData["ErrorMessage"] =
+                        "The selected event could not be displayed.";
+
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch (HttpRequestException ex)
-            {
-                _logger.LogError(ex,
-                    "Unable to retrieve event {EventId}", id);
 
-                TempData["ErrorMessage"] =
-                    "Event details are temporarily unavailable.";
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch (JsonException ex)
-            {
-                _logger.LogError(ex,
-                    "Invalid details received for event {EventId}", id);
-
-                TempData["ErrorMessage"] =
-                    "The selected event could not be displayed.";
-
-                return RedirectToAction(nameof(Index));
-            }
-        }
 
 
         public IActionResult Privacy()

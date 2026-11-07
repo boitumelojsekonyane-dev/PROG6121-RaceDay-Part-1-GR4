@@ -81,6 +81,72 @@
             </div>
 
             <hr />
+            
+            @{
+                var categories = ViewBag.Categories as List<JsonElement>
+                    ?? new List<JsonElement>();
+
+                string GetCategoryValue(JsonElement category, string property)
+                {
+                    if (category.ValueKind == JsonValueKind.Object &&
+                        category.TryGetProperty(property, out var value) &&
+                        value.ValueKind != JsonValueKind.Null)
+                    {
+                        return value.ToString();
+                    }
+
+                    return "Not specified";
+                }
+            }
+
+            <h4 class="mb-4">Available Event Categories</h4>
+
+            @if (categories.Count == 0)
+            {
+                <div class="alert alert-info">
+                    No categories are currently available for this event.
+                </div>
+            }
+            else
+            {
+                <div class="row g-3 mb-4">
+                    @foreach (var category in categories)
+                    {
+                        <div class="col-md-6">
+                            <div class="card h-100 border rounded-3">
+                                <div class="card-body">
+
+                                    <h5 class="fw-bold">
+                                        @GetCategoryValue(category, "categoryName")
+                                    </h5>
+
+                                    <p>
+                                        @GetCategoryValue(category, "description")
+                                    </p>
+
+                                    <p>
+                                        <strong>Distance:</strong>
+                                        @GetCategoryValue(category, "distanceKm") km
+                                    </p>
+
+                                    <p>
+                                        <strong>Minimum Age:</strong>
+                                        @GetCategoryValue(category, "minAge")
+                                    </p>
+
+                                    <p>
+                                        <strong>Maximum Age:</strong>
+                                        @GetCategoryValue(category, "maxAge")
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+            <hr />
 
             @if (User.Identity?.IsAuthenticated == true &&
                  User.IsInRole("Participant"))

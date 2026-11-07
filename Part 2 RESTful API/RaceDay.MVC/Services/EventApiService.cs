@@ -49,5 +49,21 @@ namespace RaceDay.MVC.Services
 
             return eventDetails;
         }
+
+
+        public async Task<List<JsonElement>> GetEventCategoriesAsync(
+            int eventId)
+        {
+            using var response = await _httpClient.GetAsync(
+                $"api/events/{eventId}/categories");
+
+            response.EnsureSuccessStatusCode();
+
+            var categories = await response.Content
+                .ReadFromJsonAsync<List<JsonElement>>();
+
+            return categories ?? new List<JsonElement>();
+        }
+
     }
 }

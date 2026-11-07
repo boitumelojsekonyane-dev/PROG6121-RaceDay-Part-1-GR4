@@ -30,6 +30,18 @@ builder.Services.AddHttpClient<
         client.BaseAddress = new Uri(apiUrl);
     });
 
+
+builder.Services.AddHttpClient<
+    RaceDay.MVC.Services.EnrolmentApiService>(client =>
+    {
+        var apiUrl = builder.Configuration["ApiSettings:BaseUrl"]
+            ?? throw new InvalidOperationException(
+                "API BaseUrl is not configured.");
+
+        client.BaseAddress = new Uri(apiUrl);
+    });
+
+
 // Configure cookie authentication
 builder.Services.AddAuthentication(
     CookieAuthenticationDefaults.AuthenticationScheme)

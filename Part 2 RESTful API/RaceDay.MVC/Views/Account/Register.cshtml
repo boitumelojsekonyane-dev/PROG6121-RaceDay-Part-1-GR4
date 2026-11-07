@@ -329,6 +329,13 @@
                                        class="form-label"></label>
                                 <input asp-for="Password"
                                        class="form-control" />
+
+                                <div class="form-text mt-1">
+                                    Your Password must contain at least 10 characters,
+                                    including an Uppercase letter, a Lowercase letter,
+                                    a Number and a Special character.
+                                </div>
+
                                 <span asp-validation-for="Password"
                                       class="text-danger"></span>
                             </div>

@@ -1,0 +1,107 @@
+﻿@model System.Text.Json.JsonElement
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Event Details - RACEDAY";
+
+    string GetValue(string property)
+    {
+        if (Model.ValueKind == JsonValueKind.Object &&
+            Model.TryGetProperty(property, out var value))
+        {
+            return value.ToString();
+        }
+
+        return "Not specified";
+    }
+
+    string title = GetValue("title");
+    string description = GetValue("description");
+    string eventDate = GetValue("eventDate");
+    string startTime = GetValue("startTime");
+    string location = GetValue("location");
+    string distance = GetValue("distanceKm");
+    string entryFee = GetValue("entryFee");
+    string status = GetValue("statusOfEvent");
+}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            Back to Events
+        </a>
+    </div>
+
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-4 p-md-5">
+
+            <h1 class="fw-bold mb-3">@title</h1>
+
+            <p class="lead text-muted">
+                @description
+            </p>
+
+            <hr />
+
+            <h4 class="mb-4">Event Information</h4>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <strong>Event Date</strong>
+                    <p>@eventDate</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Start Time</strong>
+                    <p>@startTime</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Location</strong>
+                    <p>@location</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Distance</strong>
+                    <p>@distance km</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Entry Fee</strong>
+                    <p>R @entryFee</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Event Status</strong>
+                    <p>@status</p>
+                </div>
+            </div>
+
+            <hr />
+
+            @if (User.Identity?.IsAuthenticated == true &&
+                 User.IsInRole("Participant"))
+            {
+                <div class="alert alert-info">
+                    Event enrolment will be available shortly.
+                </div>
+            }
+            else if (User.Identity?.IsAuthenticated != true)
+            {
+                <p class="text-muted">
+                    Please log in to enrol in this event.
+                </p>
+
+                <a asp-controller="Account"
+                   asp-action="Login"
+                   class="btn btn-dark">
+                    Login to Enrol
+                </a>
+            }
+
+        </div>
+    </div>
+</div>

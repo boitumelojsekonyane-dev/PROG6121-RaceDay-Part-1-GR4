@@ -38,7 +38,6 @@ C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 REST
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\scopedcss\bundle\RaceDay.MVC.styles.css
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\scopedcss\projectbundle\RaceDay.MVC.bundle.scp.css
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\ox0xgrem22-{0}-s9y91u5nkn-s9y91u5nkn.gz
-C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\7ukyk72176-{0}-n56h39c74v-n56h39c74v.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\tshhundvo5-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\xcq2afdoel-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\h1aumdsabc-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
@@ -117,3 +116,4 @@ C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 REST
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\RaceDay.MVC.pdb
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\RaceDay.MVC.genruntimeconfig.cache
 C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\ref\RaceDay.MVC.dll
+C:\Users\boitu\OneDrive\Documents\GitHub\PROG6121-RaceDay-Part-1-GR4\Part 2 RESTful API\RaceDay.MVC\obj\Debug\net10.0\compressed\7ukyk72176-{0}-zyxgdjimpe-zyxgdjimpe.gz

@@ -82,6 +82,26 @@
 
                         </div>
 
+                        
+                        <div class="card-footer bg-white border-0 pb-3">
+                            
+                            @if (int.TryParse(
+                                GetValue(raceEvent, "eventID") != "Not available"
+                                    ? GetValue(raceEvent, "eventID")
+                                    : GetValue(raceEvent, "eventId"),
+                                out int eventId))
+
+                            {
+                                <a asp-controller="Home"
+                                   asp-action="Details"
+                                   asp-route-id="@eventId"
+                                   class="btn btn-dark w-100">
+                                    View Details
+                                </a>
+                            }
+                        </div>
+
+
                     </div>
 
                 </div>

@@ -1,6 +1,7 @@
 
 @RaceDay.API_HostAddress = https://localhost:7255
 @jwtToken = PARTICIPANTS_TOKEN
+@organiserToken = "ORGANISER_TOKEN"
 GET {{RaceDay.API_HostAddress}}/api/events
 Accept: application/json
 
@@ -119,7 +120,7 @@ Content-Type: application/json
 
 {
   "email": "thabo.mokoena@raceday.co.za",
-  "password": "ORGANISERS_PASSWORD"
+  "password": "SpeedRacer62%"
 }
 
 
@@ -298,5 +299,21 @@ Content-Type: application/json
   "notes": "Sample forecast for API testing, not live weather data."
 }
 
+### Upload RaceDay event image
+POST {{RaceDay.API_HostAddress}}/api/event-images/upload
+Authorization: Bearer {{organiserToken}}
+Content-Type: multipart/form-data; boundary=RaceDayBoundary
 
+--RaceDayBoundary
+Content-Disposition: form-data; name="image"; filename="RaceDayTestEvent.jpg"
+Content-Type: image/jpeg
 
+< ./RaceDayTestEvent.jpg
+--RaceDayBoundary--
+
+### Download uploaded event image
+GET {{RaceDay.API_HostAddress}}/api/event-images/7026bf2499094573b35aaa7a06c4d2ac.jpg
+
+### Download uploaded RaceDay image
+GET https://localhost:7255/api/event-images/7026bf2499094573b35aaa7a06c4d2ac.jpg
+Accept: image/jpeg

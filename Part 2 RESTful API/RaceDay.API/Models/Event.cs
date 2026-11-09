@@ -48,6 +48,9 @@ namespace RaceDay.API.Models
         [Column(TypeName = "varchar(30)")]
         public string StatusOfEvent { get; set; } = "UPCOMING!";
 
+        [Column(TypeName = "varchar(255)")]
+        public string? ImageBlobName { get; set; }
+
         // Navigation properties
         [ForeignKey(nameof(AdminID))]
         public Admin? Admin { get; set; }

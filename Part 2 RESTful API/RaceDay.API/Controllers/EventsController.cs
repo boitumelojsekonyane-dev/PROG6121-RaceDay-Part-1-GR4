@@ -41,7 +41,8 @@ namespace RaceDay.API.Controllers
                     e.DistanceKm,
                     e.EntryFee,
                     e.StatusOfEvent,
-                    e.EventTypeID
+                    e.EventTypeID,
+                    e.ImageBlobName
                 })
                 .OrderBy(e => e.EventDate)
                 .ToListAsync();
@@ -70,7 +71,8 @@ namespace RaceDay.API.Controllers
                     e.RegistrationOpens,
                     e.RegistrationCloses,
                     e.EntryFee,
-                    e.StatusOfEvent
+                    e.StatusOfEvent,
+                    e.ImageBlobName
                 })
                 .FirstOrDefaultAsync();
 

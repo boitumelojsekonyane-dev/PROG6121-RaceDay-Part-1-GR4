@@ -120,7 +120,7 @@ Content-Type: application/json
 
 {
   "email": "thabo.mokoena@raceday.co.za",
-  "password": "SpeedRacer62%"
+  "password": "ORGANISER_PASSWORD"
 }
 
 

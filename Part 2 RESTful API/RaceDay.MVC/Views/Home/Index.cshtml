@@ -55,6 +55,21 @@
 
                     <div class="card h-100 shadow-sm">
 
+                        @{
+                            var imageBlobName = GetValue(raceEvent, "imageBlobName");
+                        }
+
+                        
+                        @if (!string.IsNullOrWhiteSpace(imageBlobName)
+                             && imageBlobName != "Not available")
+                        {
+                            <img src="@($"https://localhost:7255/api/event-images/{Uri.EscapeDataString(imageBlobName)}")"
+                                 class="card-img-top"
+                                 alt="@($"Photograph of {GetValue(raceEvent, "title")}")"
+                                 style="height: 200px; object-fit: cover;" />
+                        }
+
+
                         <div class="card-body">
 
                             <h5 class="card-title">

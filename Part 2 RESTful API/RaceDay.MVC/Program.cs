@@ -5,8 +5,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add MVC services
+// Register MVC controllers and views
 builder.Services.AddControllersWithViews();
+
+// Configure Event API service
+
 
 // Configure Event API service
 builder.Services.AddHttpClient<
@@ -17,7 +20,21 @@ builder.Services.AddHttpClient<
                 "API BaseUrl is not configured.");
 
         client.BaseAddress = new Uri(apiUrl);
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            // Local development only: accept the API development certificate.
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        }
+
+        return handler;
     });
+
 
 // Configure Authentication API service
 builder.Services.AddHttpClient<

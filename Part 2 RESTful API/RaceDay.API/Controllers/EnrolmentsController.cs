@@ -120,14 +120,25 @@ namespace RaceDay.API.Controllers
                 });
             }
 
-            // Do not allow registration after the event date.
+
+            // Prevent registration on the event date.
+            if (today == category.Event.EventDate)
+            {
+                return BadRequest(new
+                {
+                    Message = "Event is today."
+                });
+            }
+
+            // Prevent registration for past events.
             if (today > category.Event.EventDate)
             {
                 return BadRequest(new
                 {
-                    Message = "This event has already taken place."
+                    Message = "Event has ended."
                 });
             }
+
 
             // Registration must fall within the permitted dates.
             if (today < category.Event.RegistrationOpens)

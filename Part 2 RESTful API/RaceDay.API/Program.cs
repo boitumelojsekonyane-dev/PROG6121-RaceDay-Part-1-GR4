@@ -6,8 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RaceDay.API.Data;
 using RaceDay.API.Identity;
+using RaceDay.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//This is the Azure Blob Storage connection string
+builder.Services.AddSingleton<BlobStorageService>();
 
 // Register API controllers
 builder.Services.AddControllers();

@@ -23,9 +23,65 @@
     string distance = GetValue("distanceKm");
     string entryFee = GetValue("entryFee");
     string status = GetValue("statusOfEvent");
+
+    
+    DateOnly? selectedEventDate =
+        DateOnly.TryParse(GetValue("eventDate"), out var parsedDate)
+            ? parsedDate
+            : null;
+
+    var saTimeZone = TimeZoneInfo.FindSystemTimeZoneById(
+        "South Africa Standard Time");
+
+    var southAfricanToday = DateOnly.FromDateTime(
+        TimeZoneInfo.ConvertTimeFromUtc(
+            DateTime.UtcNow, saTimeZone));
+
+    bool isEventToday = selectedEventDate == southAfricanToday;
+    bool isPastEvent = selectedEventDate.HasValue &&
+                       selectedEventDate.Value < southAfricanToday;
+
+                       
+    DateOnly? registrationOpens =
+        DateOnly.TryParse(
+            GetValue("registrationOpens"), out var opensDate)
+            ? opensDate
+            : null;
+
+    DateOnly? registrationCloses =
+        DateOnly.TryParse(
+            GetValue("registrationCloses"), out var closesDate)
+            ? closesDate
+            : null;
+
+    bool registrationNotOpen =
+        registrationOpens.HasValue &&
+        southAfricanToday < registrationOpens.Value;
+
+    bool registrationClosed =
+        registrationCloses.HasValue &&
+        southAfricanToday > registrationCloses.Value;
+
+
 }
 
 <div class="container py-5">
+
+    
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
 
     <div class="mb-4">
         <a asp-controller="Home"
@@ -139,6 +195,72 @@
                                         @GetCategoryValue(category, "maxAge")
                                     </p>
 
+                                    
+                                   
+                                    @if (isEventToday)
+                                    {
+                                        <div class="alert alert-info mb-0">
+                                            Event is today.
+                                        </div>
+                                    }
+                                    else if (isPastEvent)
+                                    {
+                                        <div class="alert alert-secondary mb-0">
+                                            Event has ended.
+                                        </div>
+                                    }
+
+                                    
+                                    else if (registrationNotOpen)
+                                    {
+                                        <div class="alert alert-warning mb-0">
+                                            Registration has not opened yet.
+                                        </div>
+                                    }
+                                    else if (registrationClosed)
+                                    {
+                                        <div class="alert alert-secondary mb-0">
+                                            Registration closed.
+                                        </div>
+                                    }
+
+                                    else if (User.Identity?.IsAuthenticated == true &&
+                                             User.IsInRole("Participant"))
+                                    {
+                                        if (int.TryParse(
+                                            GetCategoryValue(category, "eventCategoryID") != "Not specified"
+                                                ? GetCategoryValue(category, "eventCategoryID")
+                                                : GetCategoryValue(category, "eventCategoryId"),
+                                            out int categoryId) &&
+                                            int.TryParse(
+                                                GetValue("eventID") != "Not specified"
+                                                    ? GetValue("eventID")
+                                                    : GetValue("eventId"),
+                                                out int eventId))
+                                        {
+                                            <form asp-controller="Enrolment"
+                                                  asp-action="Create"
+                                                  method="post">
+
+                                                @Html.AntiForgeryToken()
+
+                                                <input type="hidden"
+                                                       name="eventId"
+                                                       value="@eventId" />
+
+                                                <input type="hidden"
+                                                       name="eventCategoryId"
+                                                       value="@categoryId" />
+
+                                                <button type="submit"
+                                                        class="btn btn-success w-100">
+                                                    Enrol Now
+                                                </button>
+                                            </form>
+                                        }
+                                    }
+
+
                                 </div>
                             </div>
                         </div>
@@ -148,14 +270,8 @@
 
             <hr />
 
-            @if (User.Identity?.IsAuthenticated == true &&
-                 User.IsInRole("Participant"))
-            {
-                <div class="alert alert-info">
-                    Event enrolment will be available shortly.
-                </div>
-            }
-            else if (User.Identity?.IsAuthenticated != true)
+            
+            @if (User.Identity?.IsAuthenticated != true)
             {
                 <p class="text-muted">
                     Please log in to enrol in this event.

@@ -24,6 +24,26 @@ namespace RaceDay.API.Controllers
             _context = context;
         }
 
+
+        // GET: api/events/types
+        // Retrieve active event types for the Create Event form.
+        [HttpGet("types")]
+        public async Task<IActionResult> GetEventTypes()
+        {
+            var eventTypes = await _context.EventTypes
+                .AsNoTracking()
+                .Where(t => t.IsActive)
+                .OrderBy(t => t.TypeName)
+                .Select(t => new
+                {
+                    t.EventTypeID,
+                    t.TypeName
+                })
+                .ToListAsync();
+
+            return Ok(eventTypes);
+        }
+
         // GET: api/events
         [HttpGet]
         public async Task<IActionResult> GetEvents()
@@ -309,6 +329,7 @@ namespace RaceDay.API.Controllers
 
 
         // DELETE: api/events/4
+
         [HttpDelete("{id:int}")]
         [Authorize(Roles = "Organiser")]
         public async Task<IActionResult> DeleteEvent(int id)
@@ -333,13 +354,13 @@ namespace RaceDay.API.Controllers
                 });
             }
 
-            // An Organiser may delete only their own event.
+            // Organisers may delete only their own events.
             if (eventItem.AdminID != adminId)
             {
                 return Forbid();
             }
 
-            // Prevent deletion when related records exist.
+            // Check whether related records exist.
             var hasCategories = await _context.EventCategories
                 .AnyAsync(c => c.EventID == id);
 
@@ -349,20 +370,41 @@ namespace RaceDay.API.Controllers
             var hasWeather = await _context.Weather
                 .AnyAsync(w => w.EventID == id);
 
-            if (hasCategories || hasRoutes || hasWeather)
+
+            var hasEnrolments = await _context.Enrolments
+                .AnyAsync(e =>
+                    _context.EventCategories.Any(c =>
+                        c.EventCategoryID == e.EventCategoryID &&
+                        c.EventID == id));
+
+            var hasResults = await _context.Results
+                .AnyAsync(r =>
+                    _context.Enrolments.Any(e =>
+                        e.EnrolmentID == r.EnrolmentID &&
+                        _context.EventCategories.Any(c =>
+                            c.EventCategoryID == e.EventCategoryID &&
+                            c.EventID == id)));
+
+
+            // Protect events containing related records.
+            if (hasCategories || hasRoutes || hasWeather ||
+                hasEnrolments || hasResults)
             {
                 return Conflict(new
                 {
-                    Message = "This event cannot be deleted because it has related categories, routes or weather records."
+                    Message = "This event cannot be deleted because it has related categories, routes, weather records, enrolments or race results."
                 });
             }
 
+            // Delete the event.
             _context.Events.Remove(eventItem);
+
             await _context.SaveChangesAsync();
 
+            // Return HTTP 204 when deletion succeeds.
             return NoContent();
         }
 
-
     }
 }
+

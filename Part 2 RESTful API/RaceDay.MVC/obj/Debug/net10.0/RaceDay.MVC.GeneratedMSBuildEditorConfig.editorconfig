@@ -47,6 +47,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/boitu/OneDrive/Documents/GitHub/PROG6121-RaceDay-Part-1-GR4/Part 2 RESTful API/RaceDay.MVC/Views/Organiser/CreateEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW5pc2VyXENyZWF0ZUV2ZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boitu/OneDrive/Documents/GitHub/PROG6121-RaceDay-Part-1-GR4/Part 2 RESTful API/RaceDay.MVC/Views/Organiser/DeleteEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW5pc2VyXERlbGV0ZUV2ZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boitu/OneDrive/Documents/GitHub/PROG6121-RaceDay-Part-1-GR4/Part 2 RESTful API/RaceDay.MVC/Views/Organiser/EditEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW5pc2VyXEVkaXRFdmVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/boitu/OneDrive/Documents/GitHub/PROG6121-RaceDay-Part-1-GR4/Part 2 RESTful API/RaceDay.MVC/Views/Organiser/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW5pc2VyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

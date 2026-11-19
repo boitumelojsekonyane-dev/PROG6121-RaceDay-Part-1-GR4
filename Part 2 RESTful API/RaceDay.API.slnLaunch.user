@@ -3,12 +3,14 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "RaceDay.API\\RaceDay.API.csproj",
-        "Action": "Start"
+        "Path": "RaceDay.MVC\\RaceDay.MVC.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
       },
       {
-        "Path": "RaceDay.MVC\\RaceDay.MVC.csproj",
-        "Action": "Start"
+        "Path": "RaceDay.API\\RaceDay.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
       }
     ]
   }

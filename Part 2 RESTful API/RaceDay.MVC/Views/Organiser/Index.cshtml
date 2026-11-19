@@ -19,14 +19,20 @@
         <div class="col-md-6 col-lg-3">
             <div class="card shadow-sm h-100">
                 <div class="card-body text-center">
+                   
                     <h3 class="h5">Manage Events</h3>
+
                     <p>
-                        Create, edit and delete
-                        your sporting events.
+                        Create and manage your
+                        RaceDay sporting events.
                     </p>
-                    <span class="badge bg-secondary">
-                        Coming Soon
-                    </span>
+
+                    <a asp-controller="Organiser"
+                       asp-action="CreateEvent"
+                       class="btn btn-primary">
+                        Create Event
+                    </a>
+
                 </div>
             </div>
         </div>
@@ -78,4 +84,74 @@
 
     </div>
 
+</div>
+
+            
+@{
+    var events = ViewBag.Events as List<System.Text.Json.JsonElement>
+                 ?? new List<System.Text.Json.JsonElement>();
+}
+
+<div class="container mt-4 mb-5">
+    <h3>Existing RaceDay Events</h3>
+
+    @if (events.Count == 0)
+    {
+        <p class="text-muted">
+            No events are available.
+        </p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var raceEvent in events)
+                    {
+                        var eventId = raceEvent
+                            .GetProperty("eventID").GetInt32();
+
+                        var title = raceEvent
+                            .GetProperty("title").GetString();
+
+                        var date = raceEvent
+                            .GetProperty("eventDate").GetString();
+
+                        var location = raceEvent
+                            .GetProperty("location").GetString();
+
+                        <tr>
+                            <td>@title</td>
+                            <td>@date</td>
+                            <td>@location</td>
+                            <td>
+                                <a asp-controller="Organiser"
+                                   asp-action="EditEvent"
+                                   asp-route-id="@eventId"
+                                   class="btn btn-sm btn-primary">
+                                    Edit Event
+                                </a>
+
+                                <a asp-controller="Organiser"
+                                   asp-action="DeleteEvent"
+                                   asp-route-id="@eventId"
+                                   class="btn btn-sm btn-danger ms-2">
+                                    Delete Event
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 </div>

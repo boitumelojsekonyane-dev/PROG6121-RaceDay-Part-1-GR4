@@ -36,6 +36,7 @@ builder.Services.AddHttpClient<
     });
 
 
+
 // Configure Authentication API service
 builder.Services.AddHttpClient<
     RaceDay.MVC.Services.AuthApiService>(client =>
@@ -45,7 +46,22 @@ builder.Services.AddHttpClient<
                 "API BaseUrl is not configured.");
 
         client.BaseAddress = new Uri(apiUrl);
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            // Local development only: accept the API development certificate.
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        }
+
+        return handler;
     });
+
+
 
 
 builder.Services.AddHttpClient<
@@ -56,7 +72,21 @@ builder.Services.AddHttpClient<
                 "API BaseUrl is not configured.");
 
         client.BaseAddress = new Uri(apiUrl);
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            // Local development only: accept the API development certificate.
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        }
+
+        return handler;
     });
+
 
 
 // Configure cookie authentication

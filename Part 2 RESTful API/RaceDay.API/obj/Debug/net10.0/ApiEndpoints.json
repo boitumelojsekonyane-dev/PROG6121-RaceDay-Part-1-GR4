@@ -529,6 +529,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RaceDay.API.Controllers.EventsController",
+    "Method": "GetEventTypes",
+    "RelativePath": "api/events/types",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RaceDay.API.Controllers.ResultsController",
     "Method": "CreateResult",
     "RelativePath": "api/results",
